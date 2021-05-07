@@ -35,12 +35,27 @@ module.exports = function (deps) {
     })
   })
 
+
+  const sendMessages = () => {
+    fs.readFile(deps.messagesPath, 'utf8', (err, text) => {
+      if (err) {
+        return res.status(500).end('Error reading messages')
+      }
+
+      const messages = text
+        .split('\n')
+        .filter(txt => txt) // will filter out empty string
+        .map(JSON.parse)
+
+      io.emit("initial messages", messages)
+    })
+  }
   const server = require('http').createServer(app)
   const io = new Server(server)
 
   io.on('connection', (socket) => {
     console.log('a user connected')
-
+    sendMessages()
     socket.on('chat message', (msg) => {
       console.log('message: ' + msg)
       const data = JSON.stringify(msg)
