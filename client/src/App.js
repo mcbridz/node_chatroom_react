@@ -22,16 +22,20 @@ function App() {
   const [rooms, setRooms] = useState([]);
   const [username, setUsername] = useState([]);
 
-  socket.on("chat message", (msg) => {
-    console.log("message received");
-    let messageArr = messages;
-    setMessages([...messageArr, msg]);
-  });
+  //SET ALL 'SETUP' LISTENERS/CALLS INSIDE OF USEEFFECT
+  //APP() IS INITIALIZED FOR RE-RENDERS, MULTIPLYING LISTENERS
+  useEffect(() => {
+    socket.on("chat message", (msg) => {
+      console.log("message received");
+      let messageArr = messages;
+      setMessages([...messageArr, msg]);
+    })
+    socket.on("initial messages", (newMessages) => {
+      setRooms(getRooms(newMessages));
+      setMessages(newMessages);
+    });
+  }, []);
 
-  socket.on("initial messages", (newMessages) => {
-    setRooms(getRooms(newMessages));
-    setMessages(newMessages);
-  });
 
   return (
     <div className="App">

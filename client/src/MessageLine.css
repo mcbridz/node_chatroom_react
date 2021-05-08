@@ -1,4 +1,6 @@
 .message-item{
+    padding: 10px;
+    background-color: lightgray;
     display: flex;
     flex-direction: column;
 }
@@ -9,4 +11,8 @@
     border-radius: 5px;
     background-color: blue;
     color: white;
+}
+.message-item .text{
+    background-color: ivory;
+    margin-top: 15px;
 }

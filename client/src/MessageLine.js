@@ -6,11 +6,11 @@ const MessageLine = (props) => {
     return (
         <li className="message-item" >
             <div>
-                <span className="date">{(new Date(message.date)).toLocaleString()} </span>
                 <span className="nick">{message.nick}:</span>
+                <span className="date">{(new Date(message.date)).toLocaleString()} </span>
             </div>
-            <div>
-                <span className="text">{message.text}</span>
+            <div className="text">
+                <span >{message.text}</span>
             </div>
         </li>
     )
