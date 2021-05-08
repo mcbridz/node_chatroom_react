@@ -47,11 +47,11 @@ function App() {
         currentRoom={currentRoom}
         setCurrentRoom={setCurrentRoom}
       />
-      <NewMessage
+      {(currentRoom) ? <NewMessage
         username={username}
         currentRoom={currentRoom}
         sendMessage={sendMessage}
-      />
+      /> : ''}
     </div>
   );
 }

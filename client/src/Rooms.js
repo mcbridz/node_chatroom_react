@@ -1,4 +1,5 @@
 import React from "react";
+import "./rooms.css"
 import { useState, useEffect } from "react";
 
 const Rooms = (props) => {
@@ -19,7 +20,7 @@ const Rooms = (props) => {
 
   return (
     <div id="rooms">
-      <button onClick={addRoom}>Add Room</button>
+      <button className="addRoomButton" onClick={addRoom}>Add Room</button>
       <label htmlFor="room-select">Change Room:</label>
       <select onChange={handleChange} name="room" id="room-select">
         <option value="">--Select a Room--</option>

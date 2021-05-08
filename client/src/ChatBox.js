@@ -1,6 +1,7 @@
 import MessageLine from "./MessageLine";
 import React, { useState, useEffect } from "react";
 import Rooms from "./Rooms";
+import "./ChatBox.css"
 // function getRooms(messages, currentRoom) {
 //     const rooms = messages.map(msg => msg.room)
 //     rooms.push(currentRoom) // we have to add the currentRoom to the list, otherwise it won't be an option if there isn't already a message with that room
@@ -14,10 +15,6 @@ const ChatBox = (props) => {
   let setCurrentRoom = props.setCurrentRoom;
   // console.log('rendering chatbox')
   // console.log(messages)
-  const message_container_style = {
-    display: "flex",
-    flexDirection: "column"
-  }
   return (
     <div>
       <div>
@@ -28,13 +25,13 @@ const ChatBox = (props) => {
           setCurrentRoom={setCurrentRoom}
         />
       </div>
-      <ul className="message-container" style={message_container_style} id="messages">
+      {(currentRoom) ? <ul className="message-container" id="messages">
         {messages
           .filter((msg) => msg.room === currentRoom)
           .map((msg, id) => (
             <MessageLine className="message-line" data={msg} key={id} />
           ))}
-      </ul>
+      </ul> : <div>Select A Room To Begin Your Chat Experience!</div>}
     </div>
   );
 };

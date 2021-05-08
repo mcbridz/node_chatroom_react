@@ -15,4 +15,7 @@
 .message-item .text{
     background-color: ivory;
     margin-top: 15px;
+    display: flex;
+    justify-content: left;
+    padding-left: 8px;
 }

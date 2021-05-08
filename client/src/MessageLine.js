@@ -4,7 +4,7 @@ const MessageLine = (props) => {
     let message = props.data
     // console.log('rendering message line')
     return (
-        <li className="message-item" >
+        <div className="message-item" >
             <div>
                 <span className="nick">{message.nick}:</span>
                 <span className="date">{(new Date(message.date)).toLocaleString()} </span>
@@ -12,7 +12,7 @@ const MessageLine = (props) => {
             <div className="text">
                 <span >{message.text}</span>
             </div>
-        </li>
+        </div>
     )
 }
 
