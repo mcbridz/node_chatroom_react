@@ -14,6 +14,10 @@ const ChatBox = (props) => {
   let setCurrentRoom = props.setCurrentRoom;
   // console.log('rendering chatbox')
   // console.log(messages)
+  const message_container_style = {
+    display: "flex",
+    flexDirection: "column"
+  }
   return (
     <div>
       <div>
@@ -24,11 +28,11 @@ const ChatBox = (props) => {
           setCurrentRoom={setCurrentRoom}
         />
       </div>
-      <ul id="messages">
+      <ul className="message-container" style={message_container_style} id="messages">
         {messages
           .filter((msg) => msg.room === currentRoom)
           .map((msg, id) => (
-            <MessageLine data={msg} key={id} />
+            <MessageLine className="message-line" data={msg} key={id} />
           ))}
       </ul>
     </div>

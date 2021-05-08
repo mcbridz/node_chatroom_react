@@ -7,7 +7,7 @@ const NewMessage = (props) => {
   let sendMessage = props.sendMessage;
   const [newMsg, setNewMsg] = useState({
     text: "",
-    room: "",
+    room: props.currentRoom,
     date: new Date(),
   });
 
@@ -16,7 +16,7 @@ const NewMessage = (props) => {
     // console.log("only once?");
     sendMessage({
       text: newMsg.text,
-      room: newMsg.room,
+      room: props.currentRoom,
       date: newMsg.date,
       nick: props.username[0],
     });
