@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import "../styles/NewMessage.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const NewMessage = (props) => {
-  // let currentRoom = props.currentRoom;
-  // console.log("CURRENTROOM!!!", props.currentRoom);
-
   let sendMessage = props.sendMessage;
   const [newMsg, setNewMsg] = useState({
     text: "",
@@ -13,13 +13,14 @@ const NewMessage = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // console.log("only once?");
     sendMessage({
       text: newMsg.text,
       room: props.currentRoom,
       date: newMsg.date,
       nick: props.username[0],
+      thumbnail: props.thumbnail,
     });
+    setNewMsg({ ...newMsg, text: "" });
     console.log(newMsg.room);
   };
 
@@ -29,17 +30,23 @@ const NewMessage = (props) => {
   };
 
   return (
-    <div>
+    <div className="new-msg-div">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="new-Msg">New message: </label>
+        {/* <label htmlFor="new-Msg">New message: </label> */}
         <input
           type="text"
           onChange={handleChange}
+          placeholder="Enter a new message"
           value={newMsg.text}
           name="new-Msg"
           id="new-Msg"
         />
-        <button>Add message</button>
+        <span onClick={handleSubmit} id="submit-icon">
+          <FontAwesomeIcon
+            icon={faPaperPlane}
+            value={{ color: "navy", size: 42 }}
+          />
+        </span>
       </form>
     </div>
   );
