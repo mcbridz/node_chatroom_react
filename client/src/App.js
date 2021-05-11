@@ -15,26 +15,35 @@ const getRooms = (messages) => {
 const sendMessage = (message) => {
   socket.emit("chat message", message);
 };
-
 function App() {
   const [currentRoom, setCurrentRoom] = useState("");
   const [messages, setMessages] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [username, setUsername] = useState([]);
+  const [page, setPage] = useState(1);
+  const [numMessages, setNumMessages] = useState(2)
 
   //SET ALL 'SETUP' LISTENERS/CALLS INSIDE OF USEEFFECT
   //APP() IS INITIALIZED FOR RE-RENDERS, MULTIPLYING LISTENERS
+  const getMessages = (room, page, numMessages) => {
+    let obj = {
+      room: room,
+      page: page,
+      numMessages: numMessages
+    }
+    console.log(obj)
+    socket.emit('room messages', obj)
+  }
   useEffect(() => {
-    socket.on("chat message", (msg) => {
-      console.log("message received");
-      let messageArr = messages;
-      setMessages([...messageArr, msg]);
+    socket.on('room messages', (messages) => {
+      setMessages(JSON.parse(messages))
     })
-    socket.on("initial messages", (newMessages) => {
-      setRooms(getRooms(newMessages));
-      setMessages(newMessages);
-    });
-  }, []);
+    socket.on("initial messages", (messages) => {
+      console.log("initial messages")
+      console.log(messages)
+      setRooms(getRooms(messages))
+    })
+  }, [])
 
 
   return (
@@ -46,6 +55,10 @@ function App() {
         setRooms={setRooms}
         currentRoom={currentRoom}
         setCurrentRoom={setCurrentRoom}
+        page={page}
+        setPage={setPage}
+        getMessages={getMessages}
+        numMessages={numMessages}
       />
       {(currentRoom) ? <NewMessage
         username={username}

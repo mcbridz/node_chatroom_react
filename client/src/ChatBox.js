@@ -23,6 +23,10 @@ const ChatBox = (props) => {
           setRooms={props.setRooms}
           currentRoom={currentRoom}
           setCurrentRoom={setCurrentRoom}
+          getMessages={props.getMessages}
+          numMessages={props.numMessages}
+          page={props.page}
+          setPage={props.setPage}
         />
       </div>
       {(currentRoom) ? <ul className="message-container" id="messages">

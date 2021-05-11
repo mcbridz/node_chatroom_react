@@ -10,7 +10,7 @@ const Name = (props) => {
 
   useEffect(() => {
     getName();
-    console.log("useEffect");
+    // console.log("useEffect");
   }, []);
 
   return <h2>Welcome, {props.username.map((username) => username)}!</h2>;

@@ -7,6 +7,10 @@ const Rooms = (props) => {
   let setRooms = props.setRooms;
   let currentRoom = props.currentRoom;
   let setCurrentRoom = props.setCurrentRoom;
+  let getMessages = props.getMessages;
+  let numMessages = props.numMessages;
+  let page = props.page;
+  let setPage = props.setPage;
   const addRoom = () => {
     let newRoom = prompt("Enter name of new room...");
     rooms.push(newRoom);
@@ -15,6 +19,9 @@ const Rooms = (props) => {
   };
   const handleChange = (event) => {
     setCurrentRoom(event.target.value);
+    setPage(1)
+    console.log(event.target.value)
+    getMessages(event.target.value, page, numMessages)
   };
   // {room === currentRoom ? 'selected' : ''}
 
