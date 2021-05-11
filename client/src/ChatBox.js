@@ -10,6 +10,7 @@ import "./ChatBox.css"
 // }
 const ChatBox = (props) => {
   let messages = props.data;
+  let getMessages = props.getMessages
   let rooms = props.rooms;
   let currentRoom = props.currentRoom;
   let setCurrentRoom = props.setCurrentRoom;
@@ -36,6 +37,15 @@ const ChatBox = (props) => {
             <MessageLine className="message-line" data={msg} key={id} />
           ))}
       </ul> : <div>Select A Room To Begin Your Chat Experience!</div>}
+      {(currentRoom === '') ? <div></div> : <div><button onClick={() => {
+        props.setPage(props.page - 1)
+        getMessages(currentRoom, props.page, props.numMessages)
+      }} disabled={(props.page === 1) ? true : false}>Left</button>
+        <button onClick={() => {
+          props.setPage(props.page + 1)
+          getMessages(currentRoom, props.page, props.numMessages)
+        }}>Right</button></div>}
+
     </div>
   );
 };
